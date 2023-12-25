@@ -1,0 +1,33 @@
+Project:
+Create a program that predicts the price of a car by
+using a linear function train with a gradient descent algorithm.
+implement a simple linear regression with a single feature - in this case, the
+mileage of the car
+
+two programs:
+1 = predict the price of a car for a given mileage
+    - prompt you for a mileage, and then give
+    you back the estimated price for that mileage. 
+    hypothesis to predict the price :
+    estimatePrice(mileage) = θ0 + (θ1 ∗ mileage)
+    - Before the run of the training program,
+    theta0 and theta1 will be set to 0.
+
+2 =  train your model. It will read your dataset file
+    and perform a linear regression on the data
+    - Once the linear regression has completed, 
+    you will save the variables theta0 and
+    theta1 for use in the first program.
+    formulas :
+    cf subject
+
+Note that the estimatePrice is the same as in our first program,
+but here it uses your temporary, lastly computed theta0 and theta1.
+Also, don’t forget to simultaneously update theta0 and theta1
+
+Bonus (mais 2 premiers bien a faire pour le projet en fait,
+pour mieux visualiser la data)
+• Plotting the data into a graph to see their repartition.
+• Plotting the line resulting from your linear regression
+into the same graph, to see the result of your hard work !
+• A program that calculates the precision of your algorithm
