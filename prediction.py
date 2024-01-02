@@ -2,18 +2,22 @@ from load_csv import load
 import pandas as pd
 import matplotlib.pyplot as plt
 import csv
+import os
 
 
 def ft_thetas(data):
     t0 = 0
     t1 = 0
-    with open(data, 'r') as csvfile:
-        file = csv.reader(csvfile, delimiter=',')
-        for row in data:
-            t0 = float(row[0])
-            t1 = float(row[1])
-            print("t0 = ", t0)
-            print("t1 = ", t1)
+    if (os.path.isfile(data)):
+        with open(data, 'r') as csvfile:
+            file = csv.reader(csvfile, delimiter=',')
+            # print(file)
+            for row in data:
+                # t0 = float(row[0])
+                # t1 = float(row[1])
+                # print("t0 = ", t0)
+                # print("t1 = ", t1)
+                print(row)
     return(t0, t1)
 
 def prediction(thetas):
@@ -42,14 +46,15 @@ def main():
     data = load("data.csv")
     if data is None:
         return print('Error in data')
-    load pas reutilisable ici car on ne veut pas un dataframe en retour
-    ou alors changer valeur de retour de la fct (expected str, nytes or os.PathLike object)
+    # load pas reutilisable ici car on ne veut pas un dataframe en retour
+    # ou alors changer valeur de retour de la fct (expected str, nytes or os.PathLike object)
     # print(data)
     # data.plot(xlabel='Year', ylabel='km',
     #             title='Data')
     # plt.show()
-    thetas = ft_thetas("data.csv")
-    prediction(thetas)
+    thetas = os.path.join(os.path.dirname(__file__), "data.csv")
+    res = ft_thetas(thetas)
+    # prediction(res)
 
 if __name__ == "__main__":
     main()
