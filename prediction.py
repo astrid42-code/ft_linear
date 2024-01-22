@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import csv
 import os
 
+# https://www.toptal.com/machine-learning/supervised-machine-learning-algorithms
+
 
 # def ft_thetas(data):
 #     t0 = 0
