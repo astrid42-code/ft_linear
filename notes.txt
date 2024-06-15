@@ -31,3 +31,14 @@ pour mieux visualiser la data)
 • Plotting the line resulting from your linear regression
 into the same graph, to see the result of your hard work !
 • A program that calculates the precision of your algorithm
+
+train.py:
+
+1 recuperer la data et l afficher (affichage a retirer quand projet fini)
+2 initialiser thetha0 et 1 a 0 (sans training model lance, le prediction.py sera bien a 0 aussi)
+3 
+
+pour tous les points, bien penser a gerer cas erreurs (pas de fichier, ou de data, ou pb ouverture fichier, ...)
+
++ pour bonus faire des flags (dans les arguments) ?
+ex pour afficher le/les graphiques a la fin 
