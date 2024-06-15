@@ -5,14 +5,14 @@ from pandas import read_csv
 import matplotlib.pyplot as plt
 import os
 
-
+# def cost_fct()
 
 def main():
     # values to modify, just a simple point of departure
-    hypothesis = 5000
-    rate = 1
-    # Load data
+    hypothesis = -84
+    rate = -1.24
 
+    # Load data
     try:
         data_path = os.path.join(os.getcwd(), "data.csv")
         # dataset = read_csv(data_path, index_col=0) # , delim_whitespace=True
@@ -20,20 +20,21 @@ def main():
     except Exception:
         return print("Unvalid path/file")
 
-    # print(dataset)
+    print(dataset)
 
     # plt.plot(dataset)
 
 
 
-# # We have 30 entries in our dataset and four features. The first feature is the ID of the entry.
-# # The second feature is always 1. The third feature is the age and the last feature is the blood pressure.
-# # We will now drop the ID and One feature for now, as this is not important.
+# We have 30 entries in our dataset and four features. The first feature is the ID of the entry.
+# The second feature is always 1. The third feature is the age and the last feature is the blood pressure.
+# We will now drop the ID and One feature for now, as this is not important.
 # dataset = dataset.drop(['ID', 'One'], axis=1)
 
 # # And we will display this graph
 # %matplotlib inline
     # dataset.plot.scatter(x='km', y='price')
+    # plt.show()
 
 # # Now, we will assume that we already know the hypothesis and it looks like a straight line
     # cost function (which calculates the root mean square error between the model prediction and the actual output)
@@ -49,9 +50,11 @@ def main():
 
     for i in kms:
         estimated.append(h(i))
+    print(estimated)
 
-    plt.plot(kms, estimated, 'b')  
+    plt.plot(kms, estimated, 'y')
     plt.show()
+    # dataset.plot.scatter(x='km', y='price')
 
 
 if __name__ == "__main__":
