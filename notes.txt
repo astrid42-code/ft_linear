@@ -36,9 +36,17 @@ train.py:
 
 1 recuperer la data et l afficher (affichage a retirer quand projet fini)
 2 initialiser thetha0 et 1 a 0 (sans training model lance, le prediction.py sera bien a 0 aussi)
-3 
+3 faire des thetas_tmp pour les calculs avec le MSE partial deritative (Mean Square Error)
+en utilisant la data normalisee (.normalize())
+4 trouver les thetas finaux avec la data d origine (en denormalisant)
+5 mettre les thetas dans un fichier (.csv ou .json ?) qui sera recupere pour les predictions
 
 pour tous les points, bien penser a gerer cas erreurs (pas de fichier, ou de data, ou pb ouverture fichier, ...)
 
 + pour bonus faire des flags (dans les arguments) ?
 ex pour afficher le/les graphiques a la fin 
+
+
+entrainer un modele = c est quoi la tendance qu on observe? 
+representee une ligne ou courbe qui suit l evolution generale/moyenne 
+observee a partir d un set de donnees (par ex : plus il y a de kms moins la voiture est chere)

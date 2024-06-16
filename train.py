@@ -4,13 +4,14 @@ from pandas import read_csv
 # import pandas as pd
 import matplotlib.pyplot as plt
 import os
+import numpy as np
 
 # def cost_fct()
 
 def main():
     # values to modify, just a simple point of departure
-    hypothesis = -84
-    rate = -1.24
+    learning_rate = 0.1
+    iterations = 100
 
     # Load data
     try:
@@ -22,8 +23,11 @@ def main():
 
     print(dataset)
 
-    # plt.plot(dataset)
+    dataset.plot.scatter(x='km', y='price')
+    plt.show()
 
+    data = read_csv("data.csv").to_numpy()  # data sous forme de matrice
+    # print(data)
 
 
 # We have 30 entries in our dataset and four features. The first feature is the ID of the entry.
@@ -41,20 +45,18 @@ def main():
 
     # ex : 
     # h = lambda x: 84 + 1.24 * x
-    h = lambda x: hypothesis + rate * x
+    # h = lambda x: hypothesis + rate * x
 
 # # Let's add this line on the chart now
 # ages = range(18, 85)
-    kms = range(50000, 250000)
-    estimated = []
+    # kms = range(50000, 250000)
+    # estimated = []
 
-    for i in kms:
-        estimated.append(h(i))
-    print(estimated)
+    # for i in kms:
+    #     estimated.append(h(i))
+    # print(estimated)
 
-    plt.plot(kms, estimated, 'y')
-    plt.show()
-    # dataset.plot.scatter(x='km', y='price')
+    # plt.plot(kms, estimated, 'y')
 
 
 if __name__ == "__main__":
