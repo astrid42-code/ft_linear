@@ -4,6 +4,34 @@ import os
 import numpy as np
 
 
+def def_thetas(x, y):
+    '''
+        Parameters
+    ----------
+    l_rate : float
+        Learning rate
+    n_iter : int
+        Number of passes over the training set
+
+    # docs :
+    # linear regression, explication et calcul des thetas :
+    # https://moncoachdata.com/blog/regression-lineaire-avec-python/
+    '''
+    
+    # values to modify, just a simple point of departure
+    l_rate = 0.05
+    n_iter = 1000
+
+    for i in range(iterations):
+            # y_pred = np.dot(x, self.w_)
+            # residuals = y_pred - y
+            # gradient_vector = np.dot(x.T, residuals)
+            # self.w_ -= (self.eta / m) * gradient_vector
+            # cost = np.sum((residuals ** 2)) / (2 * m)
+            # self.cost_.append(cost)
+
+
+
 def normalize(data):
     '''
     La normalisation standard, également appelée standardisation ou normalisation z-score, consiste à soustraire la moyenne
@@ -28,9 +56,10 @@ def normalize(data):
 
 
 def main():
-    # values to modify, just a simple point of departure
-    learning_rate = 0.1
-    iterations = 100
+
+    # original thetas:
+    t0 = 0.0
+    t1 = 0.0
 
     # Load data
     try:
@@ -50,22 +79,16 @@ def main():
 
     # normalized data 
     
-    
     x = normalize(data[0])
     y = normalize(data[1])
 
-    print("x=", x, "y=", y)
+    # print("x=", x, "y=", y)
 
-    # hypothesis:
-    # h = lambda x: iterations + learning_rate * x
+    # finding thetas :
+    def_thetas(x, y)
 
-    # kms = range(50000, 250000)
-    # estimated = []
-
-    # for i in kms:
-    #     estimated.append(h(i))
-    # print(estimated)
 
 
 if __name__ == "__main__":
     main()
+

@@ -50,3 +50,15 @@ ex pour afficher le/les graphiques a la fin
 entrainer un modele = c est quoi la tendance qu on observe? 
 representee une ligne ou courbe qui suit l evolution generale/moyenne 
 observee a partir d un set de donnees (par ex : plus il y a de kms moins la voiture est chere)
+
+
+formules mathematiques utiles pour le projet :
+
+
+    Hypothesis : H theta(x) = theta0 + (theta1 * x)
+
+    Cost function -> (1 / 2m) sum(m, i=1) * (hypothesis(x(i)) - y(i))  (avec m = la taille du set de datas)
+
+    Gradient Descent -> theta(j) - LearningRate * Cost function
+
+cf readme https://github.com/qjacob/ft_linear_regression 
