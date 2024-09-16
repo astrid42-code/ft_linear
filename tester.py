@@ -1,6 +1,5 @@
-from prediction import prediction
+from predict import predict
 # from training import training
-from load_csv import load
 import pandas as pd
 import matplotlib.pyplot as plt
 
