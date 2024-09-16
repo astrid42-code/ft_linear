@@ -8,15 +8,9 @@ import numpy as np
 
 # def cost_fct()
 
-def main():
-    # values to modify, just a simple point of departure
-    learning_rate = 0.1
-    iterations = 100
-
-    # Load data
+def load_data():
     try:
         data_path = os.path.join(os.getcwd(), "data.csv")
-        # dataset = read_csv(data_path, index_col=0) # , delim_whitespace=True
         dataset = read_csv(data_path)
     except Exception:
         return print("Unvalid path/file")
@@ -26,8 +20,24 @@ def main():
     dataset.plot.scatter(x='km', y='price')
     plt.show()
 
+    mileage = []
+    prices = []
+    for i in dataset:
+        mileage.append(i[0])
+        prices.append(i[1])
+        print(mileage, prices)
+
+
+def main():
+    # values to modify, just a simple point of departure
+    learning_rate = 0.1
+    iterations = 100
+
+    # Load data
+    load_data()
+
     data = read_csv("data.csv").to_numpy()  # data sous forme de matrice
-    # print(data)
+    print(data)
 
 
 # We have 30 entries in our dataset and four features. The first feature is the ID of the entry.
