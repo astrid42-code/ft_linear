@@ -92,21 +92,29 @@ def normalize(data):
     
     return(np.array(res))
 
-# def denormalize(data):
+def denormalize(data, norm_data):
+
+    # print("data", data, "norm" ,norm_data)
+    min_data = min(data)
+    mean_data = max(data) - min_data
+    res = []
+    for i in norm_data:
+        # print(i, min_data, mean_data)
+        res.append((min_data + (mean_data * i)))
+    # print("res", res)
+
+    return(np.array(res))
+
 
 
 def main():
 
-
     # Load data
     try:
         data_path = os.path.join(os.getcwd(), "data.csv")
-        # print(data_path)
-        # dataset = read_csv(data_path, index_col=0)  # delim_whitespace=True)
         dataset = read_csv(data_path)
     except Exception:
         return print("ERROR : Unvalid path/file for data")
-    # print(dataset)
 
     dataset.plot.scatter(x='km', y='price')
     plt.show()
@@ -119,11 +127,13 @@ def main():
     x = normalize(data[0])
     y = normalize(data[1])
 
-    # print("x=", x, "y=", y)
 
     # finding thetas :
     def_thetas(x, y)
 
+    x = denormalize(data[0], x)
+    y = denormalize(data[1], y)
+    print("x=", x, "y=", y)
 
 
 if __name__ == "__main__":
