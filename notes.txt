@@ -62,3 +62,11 @@ formules mathematiques utiles pour le projet :
     Gradient Descent -> theta(j) - LearningRate * Cost function
 
 cf readme https://github.com/qjacob/ft_linear_regression 
+
+
+a faire:
+finaliser predict.py
+faire les graphiques 
+
+
+clean le code 
