@@ -14,6 +14,3 @@ data.plot(xlabel='Year', ylabel='km',
 prediction(data)
 
 
-# Attention : comme ce sont deux programmes a lancer
-# > penser a faire main dans chacun 
-# > et a faire un tester pour l'evaluation

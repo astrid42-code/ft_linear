@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from pandas import read_csv
 import numpy as np
 import os
-from train import denormalize, normalize
+from train import normalize
 
 
 def normalize_price(user, data_x):
@@ -14,27 +14,37 @@ def normalize_price(user, data_x):
 
     min_x = min(data_x)
     mean = max(data_x) - min_x  # x data's mean
-    print("min", min_x, "mean", mean)
     return ((user - min_x) / mean)
 
-def find_price(data, norm_data_x, prediction, user):
+
+def denormalize_price(norm_price, norm_data_x):
+    # denormaliser le résultat:
+
+    min_data = min(norm_data_x)
+    mean_data = max(norm_data_x) - min_data
+    res = min_data + (mean_data * norm_price)
+    # print("data", norm_data_x, "norm" , norm_price)
+
+    return(res)
+
+def find_price(data, norm_data_x, thetas, user):
     '''
     solve formula : estimatePrice(mileage) = θ0 + (θ1 ∗ mileage)
     '''
 
     # normalized user data:
     res = normalize_price(user, data[0])
-    print(res)
+    # print(res)
 
     # prediction avec user data et thetas normés:
-    norm_price = prediction[0] + (prediction[1] * res)
+    norm_price = thetas[0] + (thetas[1] * res)
 
-
-    print("norm", norm_price)
+    # print("1", thetas[1] , "0", thetas[0])
+    # print("norm", norm_price)
     # resultat de la prediction denormalisé (pour avoir le prix non normalisé)
-    final_price = denormalize(data[0], norm_price)
-    print("final", final_price)
-    return(final_price)
+    final_price = denormalize_price(norm_price, data[1])
+    # print("final", final_price)
+    return (final_price)
 
 
 
@@ -75,7 +85,11 @@ def main():
     norm_data_x = normalize(data[0])
     norm_data_y = normalize(data[1])
 
-    find_price(data, norm_data_x, prediction, user)
+    final_price = find_price(data, norm_data_x, prediction, user)
+    if final_price <= 0:
+        print("This car is too old, you should throw it away!")
+    else:
+        print('You can sell it {} euros'.format(int(final_price)))
 
 
 if __name__ == "__main__":

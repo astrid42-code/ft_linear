@@ -90,16 +90,6 @@ def normalize(data):
     
     return(np.array(res))
 
-def denormalize(data, norm_price):
-    # denormaliser le résultat:
-
-    min_data = min(data)
-    mean_data = max(data) - min_data
-    res = min_data + (mean_data * norm_price)
-    print("data", data, "norm" ,norm_price)
-    print("res", res)
-
-    return(res)
 
 
 
@@ -116,7 +106,7 @@ def main():
     plt.show()
 
     data = read_csv("data.csv").to_numpy().transpose()  # data sous forme de matrice
-    print(data[0])
+    # print(data[0])
 
     # normalized data 
     
@@ -128,9 +118,9 @@ def main():
     # finding thetas :
     def_thetas(x, y)
 
-    x = denormalize(data[0], x)
-    y = denormalize(data[1], y)
-    print("x=", x, "y=", y)
+    # x = denormalize(data[0], x)
+    # y = denormalize(data[1], y)
+    # print("x=", x, "y=", y)
 
 
 if __name__ == "__main__":

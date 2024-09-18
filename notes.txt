@@ -65,10 +65,9 @@ cf readme https://github.com/qjacob/ft_linear_regression
 
 
 a faire:
-finaliser predict.py
-> probleme avec norm_price dans predict : c'est une liste et pas un seul nombre
-regarder chez afoures ses résultats
 faire les graphiques 
 
+# Attention : comme ce sont deux programmes a lancer
+# > penser a faire un testeur pour l'evaluation
 
 clean le code 
