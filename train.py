@@ -58,8 +58,6 @@ def def_thetas(x, y):
     print('Thetas after training (normalised data): {:.5} {:.5}'.format(t0, t1))
 
 
-    # denormaliser le résultat:
-    print('Thetas after training (regular data): {:.5} {:.5}'.format(t0, t1))
 
     # write thetas in a csv file
     # https://www.w3schools.com/python/ref_func_open.asp
@@ -92,18 +90,16 @@ def normalize(data):
     
     return(np.array(res))
 
-def denormalize(data, norm_data):
+def denormalize(data, norm_price):
+    # denormaliser le résultat:
 
-    # print("data", data, "norm" ,norm_data)
     min_data = min(data)
     mean_data = max(data) - min_data
-    res = []
-    for i in norm_data:
-        # print(i, min_data, mean_data)
-        res.append((min_data + (mean_data * i)))
-    # print("res", res)
+    res = min_data + (mean_data * norm_price)
+    print("data", data, "norm" ,norm_price)
+    print("res", res)
 
-    return(np.array(res))
+    return(res)
 
 
 
@@ -126,6 +122,7 @@ def main():
     
     x = normalize(data[0])
     y = normalize(data[1])
+    # print(type(data), type(data[0]))
 
 
     # finding thetas :
