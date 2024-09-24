@@ -32,7 +32,7 @@ def find_price(data, norm_data_x, thetas, user):
     solve formula : estimatePrice(mileage) = θ0 + (θ1 ∗ mileage)
     '''
 
-    # normalized user data:
+    # normalized user data (= mileage inputs by user):
     res = normalize_price(user, data[0])
     # print(res)
 

@@ -45,6 +45,10 @@ def def_thetas(x, y):
     l_rate = 0.05
     n_iter = 1000
 
+    # memory for graphics (t0, t1)
+    m_t0 = []
+    m_t1 = []
+
     # estimation of price for each mileage
 
     for j in range(n_iter):
@@ -55,6 +59,9 @@ def def_thetas(x, y):
 
         t0 -= l_rate * gradient_t0
         t1 -= l_rate * gradient_t1
+        m_t0.append(t0)
+        m_t1.append(t1)
+    # print("mt0", m_t0)
     print('Thetas after training (normalised data): {:.5} {:.5}'.format(t0, t1))
 
 
@@ -66,6 +73,8 @@ def def_thetas(x, y):
     f = open('thetas.csv', 'w')
     f.write('{}, {}'.format(t0, t1))
     f.close()
+
+    return(m_t0, m_t1)
 
 def normalize(data):
     '''
@@ -91,6 +100,10 @@ def normalize(data):
     return(np.array(res))
 
 
+def print_graph(dataset, m_t0, m_t1):
+    dataset.plot.scatter(x='km', y='price')
+    plt.show()
+    
 
 
 def main():
@@ -102,8 +115,6 @@ def main():
     except Exception:
         return print("ERROR : Unvalid path/file for data")
 
-    dataset.plot.scatter(x='km', y='price')
-    plt.show()
 
     data = read_csv("data.csv").to_numpy().transpose()  # data sous forme de matrice
     # print(data[0])
@@ -116,11 +127,10 @@ def main():
 
 
     # finding thetas :
-    def_thetas(x, y)
+    m_t0, m_t1 = def_thetas(x, y)
 
-    # x = denormalize(data[0], x)
-    # y = denormalize(data[1], y)
-    # print("x=", x, "y=", y)
+    # print(m_t0, m_t1)
+    print_graph(dataset, m_t0, m_t1)
 
 
 if __name__ == "__main__":
