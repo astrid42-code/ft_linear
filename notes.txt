@@ -71,3 +71,12 @@ faire les graphiques
 # > penser a faire un testeur pour l'evaluation
 
 clean le code 
+
+graph :
+- nommer chaque graph correctement + labels x et y clairs
+- graph pour variations t0, t1, (loss?), data et hypothesis
+- si on fait le loss graph, penser à : 
+comprendre comment c calcule 
+faire fct pour limiter si jamais a un moment la variation est inexistante ou quasi inexistante
+
+faire des tests avec differents nb_iterations et learning rate (pour montrer aussi resultats sur graphs)

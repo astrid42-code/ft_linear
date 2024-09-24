@@ -4,12 +4,26 @@ import os
 import numpy as np
 
 
+
 # original thetas (global to be used in different functions)
 t0 = 0.0
 t1 = 0.0
 
 def predict_data(x):
     return (t0 + (t1 * x))
+
+
+def ft_loss(x, y):
+    global t0, t1
+    res = 0.0
+
+    # m = mileage, p = price
+
+    for m, p in zip(x, y):
+        res += (p - ((t1 * m) + t0)) ** 2
+            # print("res", res, "p", p, "t1", t1, "m", m, "t0", t0)
+    # print(res /len(x))
+    return (res /len(x))
 
 
 def def_thetas(x, y):
@@ -42,12 +56,13 @@ def def_thetas(x, y):
     print('Thetas before training: {} {}'.format(t0, t1))
 
     # values to modify, just a simple point of departure
-    l_rate = 0.05
-    n_iter = 1000
+    l_rate = 0.5
+    n_iter = 500
 
-    # memory for graphics (t0, t1)
+    # memory for graphics (t0, t1, m_loss)
     m_t0 = []
     m_t1 = []
+    m_loss = []
 
     # estimation of price for each mileage
 
@@ -61,7 +76,9 @@ def def_thetas(x, y):
         t1 -= l_rate * gradient_t1
         m_t0.append(t0)
         m_t1.append(t1)
-    # print("mt0", m_t0)
+        m_loss.append(ft_loss(x, y))
+        # print("tmp", t0, t1)
+    # print("m_loss", m_loss)
     print('Thetas after training (normalised data): {:.5} {:.5}'.format(t0, t1))
 
 
@@ -74,7 +91,7 @@ def def_thetas(x, y):
     f.write('{}, {}'.format(t0, t1))
     f.close()
 
-    return(m_t0, m_t1)
+    return(m_t0, m_t1, m_loss)
 
 def normalize(data):
     '''
@@ -100,7 +117,8 @@ def normalize(data):
     return(np.array(res))
 
 
-def print_graph(dataset, m_t0, m_t1):
+def print_graph(dataset, m_t0, m_t1, m_loss):
+    
     dataset.plot.scatter(x='km', y='price')
     plt.show()
     
@@ -127,10 +145,10 @@ def main():
 
 
     # finding thetas :
-    m_t0, m_t1 = def_thetas(x, y)
+    m_t0, m_t1, m_loss = def_thetas(x, y)
 
     # print(m_t0, m_t1)
-    print_graph(dataset, m_t0, m_t1)
+    print_graph(dataset, m_t0, m_t1, m_loss)
 
 
 if __name__ == "__main__":
