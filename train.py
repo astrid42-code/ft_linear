@@ -13,19 +13,6 @@ def predict_data(x):
     return (t0 + (t1 * x))
 
 
-def ft_loss(x, y):
-    global t0, t1
-    res = 0.0
-
-    # m = mileage, p = price
-
-    for m, p in zip(x, y):
-        res += (p - ((t1 * m) + t0)) ** 2
-            # print("res", res, "p", p, "t1", t1, "m", m, "t0", t0)
-    # print(res /len(x))
-    return (res /len(x))
-
-
 def def_thetas(x, y):
     '''
     Parameters
@@ -59,10 +46,9 @@ def def_thetas(x, y):
     l_rate = 0.5
     n_iter = 500
 
-    # memory for graphics (t0, t1, m_loss)
+    # memory for graphics (t0, t1)
     m_t0 = []
     m_t1 = []
-    m_loss = []
 
     # estimation of price for each mileage
 
@@ -76,9 +62,7 @@ def def_thetas(x, y):
         t1 -= l_rate * gradient_t1
         m_t0.append(t0)
         m_t1.append(t1)
-        m_loss.append(ft_loss(x, y))
-        # print("tmp", t0, t1)
-    # print("m_loss", m_loss)
+
     print('Thetas after training (normalised data): {:.5} {:.5}'.format(t0, t1))
 
 
@@ -91,7 +75,7 @@ def def_thetas(x, y):
     f.write('{}, {}'.format(t0, t1))
     f.close()
 
-    return(m_t0, m_t1, m_loss)
+    return(m_t0, m_t1)
 
 def normalize(data):
     '''
@@ -117,7 +101,7 @@ def normalize(data):
     return(np.array(res))
 
 
-def print_graph(dataset, data, m_t0, m_t1, m_loss):
+def print_graph(dataset, data, m_t0, m_t1):
     '''
     Print different graphs with data and evolution
     '''
@@ -129,12 +113,24 @@ def print_graph(dataset, data, m_t0, m_t1, m_loss):
     plt.show()
 
     # 2nd graph : theta0 evolution
-    
+
+    plt.title('Theta0 evolution')
+    plt.plot(m_t1)
+    plt.show()
 
     # 3rd graph : theta1 evolution
 
+    plt.title('Theta1 evolution')
+    plt.plot(m_t0)
+    plt.show()
 
-    # 4th graph : final prediction
+    # 4th graph : final prediction compare to first one
+    dataset.plot.scatter(x='km', y='price', marker='*')
+    plt.plot([max(data[0]), min(data[0])], [min(data[1]), max(data[1])], 'o:r')
+    plt.title('Final prediction')
+
+    plt.show()
+
 
 
     
@@ -161,10 +157,10 @@ def main():
 
 
     # finding thetas :
-    m_t0, m_t1, m_loss = def_thetas(x, y)
+    m_t0, m_t1 = def_thetas(x, y)
 
     # print(m_t0, m_t1)
-    print_graph(dataset, data, m_t0, m_t1, m_loss)
+    print_graph(dataset, data, m_t0, m_t1)
 
 
 if __name__ == "__main__":
