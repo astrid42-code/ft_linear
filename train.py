@@ -117,10 +117,26 @@ def normalize(data):
     return(np.array(res))
 
 
-def print_graph(dataset, m_t0, m_t1, m_loss):
-    
-    dataset.plot.scatter(x='km', y='price')
+def print_graph(dataset, data, m_t0, m_t1, m_loss):
+    '''
+    Print different graphs with data and evolution
+    '''
+
+    # first graph : first prediction (data plot)
+    dataset.plot.scatter(x='km', y='price', marker='*')
+    plt.title('First prediction (data plot)')
+    plt.plot([max(data[0]), min(data[0])], [min(data[1]), max(data[1])], 'o:r')  # 'o:r' = pointillés rouges
     plt.show()
+
+    # 2nd graph : theta0 evolution
+    
+
+    # 3rd graph : theta1 evolution
+
+
+    # 4th graph : final prediction
+
+
     
 
 
@@ -148,7 +164,7 @@ def main():
     m_t0, m_t1, m_loss = def_thetas(x, y)
 
     # print(m_t0, m_t1)
-    print_graph(dataset, m_t0, m_t1, m_loss)
+    print_graph(dataset, data, m_t0, m_t1, m_loss)
 
 
 if __name__ == "__main__":
