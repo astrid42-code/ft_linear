@@ -1,4 +1,4 @@
-from pandas import read_csv
+from pandas import read_csv, DataFrame
 import matplotlib.pyplot as plt
 import os
 import numpy as np
@@ -111,21 +111,23 @@ def print_graph(dataset, data, m_t0, m_t1):
     plt.title('First prediction (data plot)')
     plt.plot([max(data[0]), min(data[0])], [min(data[1]), max(data[1])], 'o:r')  # 'o:r' = pointillés rouges
     plt.show()
-
+    # print(type(dataset))
     # 2nd graph : theta0 evolution
 
     plt.title('Theta0 evolution')
-    plt.plot(m_t1)
+    plt.plot(m_t0)
     plt.show()
 
     # 3rd graph : theta1 evolution
-
+    m_t1_graph = DataFrame(m_t1)
+    m_t1_graph.plot.scatter(x='iterations', y='theta1')
+    # plt(='iterations', y='theta1')
     plt.title('Theta1 evolution')
-    plt.plot(m_t0)
     plt.show()
 
     # 4th graph : final prediction compare to first one
     dataset.plot.scatter(x='km', y='price', marker='*')
+
     plt.plot([max(data[0]), min(data[0])], [min(data[1]), max(data[1])], 'o:r')
     plt.title('Final prediction')
 
