@@ -18,14 +18,15 @@ def normalize_price(user, data_x):
 
 
 def denormalize_price(norm_price, norm_data_x):
-    # denormaliser le résultat:
+    '''
+    denormalise result
+    '''
 
     min_data = min(norm_data_x)
     mean_data = max(norm_data_x) - min_data
     res = min_data + (mean_data * norm_price)
-    # print("data", norm_data_x, "norm" , norm_price)
-
     return(res)
+
 
 def find_price(data, norm_data_x, thetas, user):
     '''
@@ -34,18 +35,13 @@ def find_price(data, norm_data_x, thetas, user):
 
     # normalized user data (= mileage inputs by user):
     res = normalize_price(user, data[0])
-    # print(res)
 
-    # prediction avec user data et thetas normés:
+    # prediction with user data and normed thetas :
     norm_price = thetas[0] + (thetas[1] * res)
 
-    # print("1", thetas[1] , "0", thetas[0])
-    # print("norm", norm_price)
-    # resultat de la prediction denormalisé (pour avoir le prix non normalisé)
+    # result of denormalized prediction (to get denormalized price)
     final_price = denormalize_price(norm_price, data[1])
-    # print("final", final_price)
     return (final_price)
-
 
 
 def main():

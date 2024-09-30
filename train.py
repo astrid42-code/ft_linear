@@ -4,7 +4,6 @@ import os
 import numpy as np
 
 
-
 # original thetas (global to be used in different functions)
 t0 = 0.0
 t1 = 0.0
@@ -55,8 +54,6 @@ def def_thetas(x, y):
     for j in range(n_iter):
         gradient_t0 = (sum([predict_data(x[i]) - y[i] for i in range(len(x))]) / len(x))
         gradient_t1 = (sum([(predict_data(x[i]) - y[i]) * x[i] for i in range(len(x))]) / len(x))
-        # print("xi", x[i], "predict_x", predict_data(x[i]), "yi", y[i])
-        # print("tmp0 ", gradient_t0, len(x))
 
         t0 -= l_rate * gradient_t0
         t1 -= l_rate * gradient_t1
@@ -64,8 +61,6 @@ def def_thetas(x, y):
         m_t1.append(t1)
 
     print('Thetas after training (normalised data): {:.5} {:.5}'.format(t0, t1))
-
-
 
     # write thetas in a csv file
     # https://www.w3schools.com/python/ref_func_open.asp
@@ -101,17 +96,33 @@ def normalize(data):
     return(np.array(res))
 
 
+def norm(data, x):
+    min_x = min(data)
+    mean = max(data) - min(data)
+    return ((x - min_x) / mean)
+
+
+def denorm(data, x):
+    min_x = min(data)
+    mean = max(data) - min_x
+    res = min_x + (mean * x)
+    return (res)
+
+
 def print_graph(dataset, data, m_t0, m_t1):
     '''
     Print different graphs with data and evolution
     '''
 
+    max_x = max(data[0])
+    min_x = min(data[0])
+
     # first graph : first prediction (data plot)
     dataset.plot.scatter(x='km', y='price', marker='*')
     plt.title('First prediction (data plot)')
-    plt.plot([max(data[0]), min(data[0])], [min(data[1]), max(data[1])], 'o:r')  # 'o:r' = pointillés rouges
+    plt.plot([max_x, min_x], [min(data[1]), max(data[1])], 'o:r')  # 'o:r' = pointillés rouges
     plt.show()
-    # print(type(dataset))
+
     # 2nd graph : theta0 evolution
 
     plt.title('Theta0 evolution')
@@ -119,23 +130,23 @@ def print_graph(dataset, data, m_t0, m_t1):
     plt.show()
 
     # 3rd graph : theta1 evolution
-    m_t1_graph = DataFrame(m_t1)
-    m_t1_graph.plot.scatter(x='iterations', y='theta1')
+    # m_t1_graph = DataFrame(m_t1)
+    # m_t1_graph.plot.scatter(x='iterations', y='theta1')
     # plt(='iterations', y='theta1')
     plt.title('Theta1 evolution')
+    plt.plot(m_t1)
     plt.show()
 
     # 4th graph : final prediction compare to first one
+    graph_x = [float(min_x), float(max_x)]
+    y1 = t0 + ((norm(data[0], graph_x[0])) * t1)
+    y2 = t0 + ((norm(data[0], graph_x[1])) * t1)
+    graph_y = [denorm(data[1], y1), denorm(data[1], y2)]
     dataset.plot.scatter(x='km', y='price', marker='*')
-
-    plt.plot([max(data[0]), min(data[0])], [min(data[1]), max(data[1])], 'o:r')
+    plt.plot([graph_x[0], graph_x[1]], [graph_y[0], graph_y[1]], 'o:r')
     plt.title('Final prediction')
 
     plt.show()
-
-
-
-    
 
 
 def main():
@@ -149,19 +160,16 @@ def main():
 
 
     data = read_csv("data.csv").to_numpy().transpose()  # data sous forme de matrice
-    # print(data[0])
 
     # normalized data 
     
     x = normalize(data[0])
     y = normalize(data[1])
-    # print(type(data), type(data[0]))
-
 
     # finding thetas :
     m_t0, m_t1 = def_thetas(x, y)
 
-    # print(m_t0, m_t1)
+    # print graphics:
     print_graph(dataset, data, m_t0, m_t1)
 
 

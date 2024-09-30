@@ -1,2 +1,0 @@
-Thetas before training: 0.0 0.0
-Thetas after training (normalised data): 0.93932 -1.0036
