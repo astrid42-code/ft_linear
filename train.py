@@ -120,9 +120,9 @@ def print_graph(dataset, data, m_t0, m_t1):
 
     # first graph : first prediction (data plot)
     
-    plt.title('First prediction (data plot)')
     dataset.plot.scatter(x='km', y='price', marker='*')
     plt.plot([max_x, min_x], [min(data[1]), max(data[1])], 'o:r')  # 'o:r' = pointillés rouges
+    plt.title('First prediction (data plot)')
 
     plt.show()
 
