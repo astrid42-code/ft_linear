@@ -116,36 +116,55 @@ def print_graph(dataset, data, m_t0, m_t1):
 
     max_x = max(data[0])
     min_x = min(data[0])
+    graph_x = sorted(data[0])
 
     # first graph : first prediction (data plot)
-    dataset.plot.scatter(x='km', y='price', marker='*')
+    
     plt.title('First prediction (data plot)')
+    dataset.plot.scatter(x='km', y='price', marker='*')
     plt.plot([max_x, min_x], [min(data[1]), max(data[1])], 'o:r')  # 'o:r' = pointillés rouges
+
     plt.show()
 
     # 2nd graph : theta0 evolution
 
     plt.title('Theta0 evolution')
+    plt.xlabel('iterations')
+    plt.ylabel('theta0')
     plt.plot(m_t0)
     plt.show()
 
     # 3rd graph : theta1 evolution
-    # m_t1_graph = DataFrame(m_t1)
-    # m_t1_graph.plot.scatter(x='iterations', y='theta1')
-    # plt(='iterations', y='theta1')
+
     plt.title('Theta1 evolution')
+    plt.xlabel('iterations')
+    plt.ylabel('theta1')
     plt.plot(m_t1)
     plt.show()
 
     # 4th graph : final prediction compare to first one
-    graph_x = [float(min_x), float(max_x)]
-    y1 = t0 + ((norm(data[0], graph_x[0])) * t1)
-    y2 = t0 + ((norm(data[0], graph_x[1])) * t1)
-    graph_y = [denorm(data[1], y1), denorm(data[1], y2)]
-    dataset.plot.scatter(x='km', y='price', marker='*')
-    plt.plot([graph_x[0], graph_x[1]], [graph_y[0], graph_y[1]], 'o:r')
-    plt.title('Final prediction')
+    
+    # graph_x = [float(min_x), float(max_x)]
+    # y1 = t0 + ((norm(data[0], graph_x[0])) * t1)
+    # y2 = t0 + ((norm(data[0], graph_x[1])) * t1)
+    # graph_y = [denorm(data[1], y1), denorm(data[1], y2)]
+    # dataset.plot.scatter(x='km', y='price', marker='*')
+    # plt.plot([graph_x[0], graph_x[1]], [graph_y[0], graph_y[1]], 'r')
+    # plt.title('Final prediction')
+    
+    y1 = []
+    graph_y = []
 
+    # graph_x = sorted(data[0])
+    for i in range(len(data[0])):
+        y1.append(t0 + ((norm(data[0], graph_x[i])) * t1))
+    for i in range(len(data[1])):
+        graph_y.append(denorm(data[1], y1[i]))
+    dataset.plot.scatter(x='km', y='price', marker='*')
+    plt.plot(graph_x, graph_y, 'r')
+    plt.plot([max_x, min_x], [min(data[1]), max(data[1])], 'o:g')
+    plt.title('Final prediction')
+    
     plt.show()
 
 
